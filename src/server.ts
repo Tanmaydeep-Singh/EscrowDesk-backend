@@ -7,6 +7,7 @@ import tasksRoutes from "./routes/Tasks/TasksRouter";
 import documentsRoutes from "./routes/Documents/DocumentsRoutes";
 import clientsRoutes from "./routes/Clients/ClientsRoutes"
 import logsRoutes from "./routes/Logs/LogsRoutes"
+import userRoutes from "./routes/User/UserRoutes"
 import { loggerMiddleware } from "./middleware/logger";
 
 
@@ -34,6 +35,8 @@ app.use("/api/tasks",loggerMiddleware, tasksRoutes); /// Tasks
 app.use("/api/documents",loggerMiddleware, documentsRoutes); /// Documents
 app.use("/api/clients", clientsRoutes); /// Documents
 app.use("/api/logs",logsRoutes); // Logs
+app.use("/api/users",userRoutes); // Logs
+
 
 
 

@@ -18,7 +18,6 @@ export const loginWithWallet = async (req: Request, res: Response) => {
     });
   }
 
-  // Generate JWT
 
   res.json({ user });
 };
