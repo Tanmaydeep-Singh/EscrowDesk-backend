@@ -5,6 +5,7 @@ import { connectDB } from "./config/db";
 import projectRoutes from "./routes/Projects/ProjectsRoute";
 import tasksRoutes from "./routes/Tasks/TasksRouter";
 import documentsRoutes from "./routes/Documents/DocumentsRoutes";
+import clientsRoutes from "./routes/Clients/ClientsRoutes"
 
 // import authRoutes from "./routes/auth";
 // import escrowRoutes from "./routes/escrow";
@@ -28,6 +29,11 @@ app.get("/", (req, res) => {
 app.use("/api/projects", projectRoutes); /// Projects
 app.use("/api/tasks", tasksRoutes); /// Tasks
 app.use("/api/documents", documentsRoutes); /// Documents
+app.use("/api/clients", clientsRoutes); /// Documents
+
+/// Users
+/// Clients
+/// Logs
 
 
 
