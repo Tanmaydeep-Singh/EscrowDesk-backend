@@ -2,19 +2,41 @@
 import { Request, Response } from "express";
 import Projects, { IProject } from "../../models/Projects/Projects";
 
-// Create Project
+
+
 export const createProject = async (req: Request, res: Response): Promise<void> => {
   try {
-    const project: IProject = new Projects({
-      ...req.body,
-      createdBy: (req as any).user.id,
+    console.log("Request Body:", req.body);
+
+    const { name, description, budget, client, freelancer } = req.body;
+
+    if (!name ) {
+      res.status(400).json({ message: "Name is required" });
+      return;
+    }
+
+    // Create project
+    const project = await Projects.create({
+      name,
+      description,
+      client: client || null,
+      progress:0,
+      tasks: [],
+      logs: [],
+      documents: [],
+      status: "pending",
+      codeLink: "",
+      liveLink: "",
+      budget,
     });
-    await project.save();
+
     res.status(201).json(project);
   } catch (err: any) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // Get all projects
 export const getProjects = async (req: Request, res: Response): Promise<void> => {

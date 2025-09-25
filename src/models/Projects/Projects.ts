@@ -4,15 +4,17 @@ import { Schema, model, Document, Types } from "mongoose";
 export interface IProject extends Document {
     name: string;
     description: string;
+    budget?:number;
     client: Types.ObjectId;
-    freelancer?: Types.ObjectId;
     tasks: Types.ObjectId[];
     logs: Types.ObjectId[];
     documents:Types.ObjectId[];
+    progress: number;
     status: "pending" | "in-progress" | "completed" | "cancelled";
     codeLink: string;
     liveLink: string;
-    deadline?: Date;
+    startDate:Date;
+    endDate: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -21,8 +23,9 @@ const ProjectSchema = new Schema<IProject>(
     {
         name: { type: String, required: true },
         description: { type: String },
-        client: { type: Schema.Types.ObjectId, ref: "Client", required: true },
-        freelancer: { type: Schema.Types.ObjectId, ref: "User" },
+        budget: { type: Number },
+        progress: { type: Number },
+        client: { type: Schema.Types.ObjectId, ref: "Client"},
         tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
         logs: [{ type: Schema.Types.ObjectId, ref: "Log" }],
         documents: [{ type: Schema.Types.ObjectId, ref: "Document" }],
@@ -33,7 +36,8 @@ const ProjectSchema = new Schema<IProject>(
         },
         codeLink: { type: String },
         liveLink: { type: String },
-        deadline: Date,
+        startDate: Date,
+        endDate:Date,
     },
     { timestamps: true }
 );
