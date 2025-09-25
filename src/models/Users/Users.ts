@@ -12,7 +12,7 @@ export interface IUser extends Document {
 
 const UserSchema = new Schema<IUser>(
   {
-    name: { type: String, required: true },
+    name: { type: String},
     walletAddress: { type: String, required: true, unique: true },
     projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
     clients: [{ type: Schema.Types.ObjectId, ref: "Client" }],

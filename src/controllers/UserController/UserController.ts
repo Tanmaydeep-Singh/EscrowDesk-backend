@@ -3,6 +3,7 @@ import Users from "../../models/Users/Users";
 
 
 export const loginWithWallet = async (req: Request, res: Response) => {
+  console.log("Login called");
   const { walletAddress } = req.body;
   if (!walletAddress) return res.status(400).json({ error: "Wallet address required" });
 
