@@ -32,8 +32,8 @@ app.get("/", (req, res) => {
 
 // routes
 app.use("/api/projects", projectRoutes);
-app.use("/api/tasks", loggerMiddleware, tasksRoutes);
-app.use("/api/documents", loggerMiddleware, documentsRoutes);
+app.use("/api/tasks",  tasksRoutes);
+app.use("/api/documents",  documentsRoutes);
 app.use("/api/clients", clientsRoutes);
 app.use("/api/logs", logsRoutes);
 app.use("/api/users", userRoutes);

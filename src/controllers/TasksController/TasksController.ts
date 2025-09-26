@@ -6,17 +6,22 @@ import Projects from "../../models/Projects/Projects";
 // ✅ Create a new task
 export const createTask = async (req: Request, res: Response) => {
   try {
-    const task = new Tasks(req.body);
-    const savedTask = await task.save();
+    const { projectId, userId, name, priority, status, dueDate, milestone } = req.body;
 
-    // link task to project
-    await Projects.findByIdAndUpdate(task.project, {
-      $push: { tasks: savedTask._id }
+
+    const task = await Tasks.create({
+      project: projectId,
+      user: userId,
+      name,
+      priority,
+      status,
+      dueDate,
+      milestone,
     });
 
-    res.status(201).json(savedTask);
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(201).json(task);
+  } catch (error : any) {
+    res.status(500).json({ message: error.message });
   }
 };
 

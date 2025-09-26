@@ -3,21 +3,25 @@ import { Schema, model, Document, Types } from "mongoose";
 
 export interface ITask extends Document {
   project: Types.ObjectId;
+  user: Types.ObjectId;       // Assignee
   name: string;
-  description?: string;
+  priority: "low" | "medium" | "high";
   status: "pending" | "in-progress" | "done";
   dueDate?: Date;
+  milestone?: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const TaskSchema = new Schema<ITask>(
   {
-    project: { type: Schema.Types.ObjectId, ref: "Project", required: true },
+    project: { type: Schema.Types.ObjectId, ref: "Project"},
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true }, // Assignee
     name: { type: String, required: true },
-    description: String,
+    priority: { type: String, enum: ["low", "medium", "high"], default: "low" },
     status: { type: String, enum: ["pending", "in-progress", "done"], default: "pending" },
     dueDate: Date,
+    milestone: String,
   },
   { timestamps: true }
 );
